@@ -1,0 +1,70 @@
+require:
+  - rubocop-rspec
+  - rubocop-performance
+
+AllCops:
+  Exclude:
+    - db/**
+    - spec/spec_helper.rb
+    - .pryrc
+    - vendor/**/*
+  NewCops: enable
+
+# Code
+Style/Documentation:
+  Enabled: false
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
+Style/ExponentialNotation:
+  Enabled: true
+Style/SlicingWithRange:
+  Enabled: true
+Layout/HashAlignment:
+  EnforcedColonStyle: table
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+Lint/RaiseException:
+  Enabled: true
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+Metrics/ModuleLength:
+  Exclude:
+    - "**/*_spec.rb"
+
+Metrics/BlockLength:
+  Exclude:
+    - "**/*_spec.rb"
+Metrics/MethodLength:
+  Max: 15
+
+Metrics/AbcSize:
+  Max: 20
+
+Metrics/ClassLength:
+  Enabled: false
+
+# Tests
+RSpec/DescribeClass:
+  Exclude:
+    - ""
+
+RSpec/ExampleLength:
+  Max: 15
+
+RSpec/MessageSpies:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 5
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+

@@ -4,18 +4,16 @@ require 'simplecov'
 require 'bundler'
 
 SimpleCov.start do
-  add_group '', ''
+  add_group 'Lib', 'lib'
   add_filter 'config'
   add_filter 'vendor'
   add_filter 'spec'
   minimum_coverage 90
 end
 
+ENV['ENV'] = 'test'
 
-Bundler.require(:default, :test)
-# Disable webrequests
-
-set :environment, :test
+require File.expand_path('../../lib/boot.rb', __FILE__)
 
 RSpec.configure do |conf|
   conf.order = :random

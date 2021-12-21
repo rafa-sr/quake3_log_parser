@@ -4,7 +4,6 @@ require:
 
 AllCops:
   Exclude:
-    - db/**
     - spec/spec_helper.rb
     - .pryrc
     - vendor/**/*
@@ -54,7 +53,7 @@ Metrics/ClassLength:
 # Tests
 RSpec/DescribeClass:
   Exclude:
-    - ""
+    - "lib/**.rb"
 
 RSpec/ExampleLength:
   Max: 15

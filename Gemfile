@@ -16,7 +16,7 @@ group :test, :development do
   gem 'guard-rspec'
   gem 'rubocop'
   gem 'rubocop-gemfile'
-  gem 'rubocop-rspec'
   gem 'rubocop-performance'
+  gem 'rubocop-rspec'
   gem 'shotgun'
 end

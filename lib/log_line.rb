@@ -5,6 +5,8 @@ class LogLine
   attr_accessor :tokens, :line
 
   WORDS_REGEX = /\w+/
+  BEFORE_KILLER_PLAYER_INDEX = 6.freeze
+
 
   def initialize(line)
     @line = line
@@ -20,19 +22,31 @@ class LogLine
   end
 
   def killer_player
-    before_players_info = 6
-    players_info = @tokens.drop(before_players_info)
-    killer_name = ''
-    players_info.each_with_index do |token, index|
-      return killer_name if token == 'killed'
+    players_tokens = @tokens.drop(BEFORE_KILLER_PLAYER_INDEX)
+    parse_player_name(players_tokens, 'killed')
+  end
 
-      killer_name += token if index.zero?
-      killer_name = "#{killer_name} #{token}" if index.positive?
-    end
-    nil
+  def death_player
+    after_killed_index = find_killed_word_index + 1
+    after_killed_tokens = @tokens.drop(after_killed_index)
+    parse_player_name(after_killed_tokens, 'by')
+  end
+
+  def find_killed_word_index
+    @tokens.each_with_index { |token , index | return index if token == 'killed'   }
   end
 
   def kill?
     event == 'Kill'
+  end
+
+  private def parse_player_name(player_tokens, split_by)
+    player_name = ''
+    player_tokens.each_with_index do |token, index|
+      return player_name if token == split_by
+
+      player_name += token if index.zero?
+      player_name = "#{player_name} #{token}" if index.positive?
+    end
   end
 end

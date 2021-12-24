@@ -20,25 +20,25 @@ describe LogLine do
     end
   end
 
-  describe '#kill?' do
+  describe '#valid_kill_line?' do
     it 'return true when the event of the log is a kill' do
       log_line = described_class.new(line)
 
-      expect(log_line.kill?).to be true
+      expect(log_line.valid_kill_line?).to be true
     end
 
     it 'return false when the event of the log is not a event' do
-      line = ' 26  0:00 ------------------------------------------------------------'
+      line = '  0:00 ------------------------------------------------------------'
       log_line = described_class.new(line)
 
-      expect(log_line.kill?).to be false
+      expect(log_line.valid_kill_line?).to be false
     end
 
     it 'return false when the event of the log is not a kill' do
       line = ' 20:34 ClientConnect: 2'
       log_line = described_class.new(line)
 
-      expect(log_line.kill?).to be false
+      expect(log_line.valid_kill_line?).to be false
     end
   end
 
@@ -56,11 +56,11 @@ describe LogLine do
       expect(log_line.killer_player).to eq 'Dono da Bola'
     end
 
-    it 'return nil if is not a kill event' do
-      line = ' 25:34 Item: 2 weapon_rocketlauncher'
+    it 'return world when is killed by <world>' do
+      line = ' 21:42 Kill: 1022 2 22: <world> killed Isgalamido by MOD_TRIGGER_HURT'
       log_line = described_class.new(line)
 
-      expect(log_line.killer_player).to eq nil
+      expect(log_line.killer_player).to eq 'world'
     end
   end
 
@@ -77,12 +77,13 @@ describe LogLine do
 
       expect(log_line.death_player).to eq 'Zeh'
     end
+  end
 
-    it 'return nil if is not a kill event' do
-      line = ' 25:34 Item: 2 weapon_rocketlauncher'
+  describe '#death_cause' do
+    it 'return the last word (MOD_ROCKET) in the log line' do
       log_line = described_class.new(line)
 
-      expect(log_line.death_player).to eq nil
+      expect(log_line.death_cause).to eq 'MOD_ROCKET'
     end
   end
 end

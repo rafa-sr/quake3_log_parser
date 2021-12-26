@@ -2,6 +2,7 @@
 
 require 'simplecov'
 require 'bundler'
+require 'byebug'
 
 SimpleCov.start do
   add_group 'Lib', 'lib'

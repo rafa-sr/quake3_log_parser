@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'byebug'
 class LogLine
   attr_accessor :tokens, :line
 

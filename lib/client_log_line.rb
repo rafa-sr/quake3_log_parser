@@ -18,8 +18,4 @@ class ClientLogLine < LogLine
 
     false
   end
-
-  def id
-    @id ||= @tokens[3]
-  end
 end

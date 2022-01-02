@@ -1,19 +1,14 @@
 # frozen_string_literal: true
 
 class KillLogLine < LogLine
-  def killer_player
-    before_killed_tokens = @tokens.drop(BEFORE_KILLER_PLAYER_INDEX)
-    parse_player_name(before_killed_tokens, KILLED)
+  WORLD_ID = '1022'
+
+  def killer_id
+    id
   end
 
-  def death_player
-    after_killed_index = find_killed_word_index + 1
-    after_killed_tokens = @tokens.drop(after_killed_index)
-    parse_player_name(after_killed_tokens, BY)
-  end
-
-  def find_killed_word_index
-    @tokens.each_with_index { |token, index| return index if token == KILLED }
+  def death_id
+    @death_id ||= @tokens[4]
   end
 
   def death_cause

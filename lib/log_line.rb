@@ -4,10 +4,7 @@ class LogLine
   attr_accessor :tokens, :line
 
   WORDS_REGEX = /\w+/
-  BEFORE_KILLER_PLAYER_INDEX = 6
-  KILLED = 'killed'
   KILL = 'Kill'
-  BY = 'by'
   CLIENT_CONNECT = 'ClientConnect'
   CLIENT_NAME_CHANGED = 'ClientUserinfoChanged'
   CLIENT_BEGIN = 'ClientBegin'
@@ -22,7 +19,7 @@ class LogLine
     @event ||= @tokens[2]
   end
 
-  def valid_kill_line?
+  def kill_line?
     event == KILL
   end
 
@@ -31,15 +28,7 @@ class LogLine
     false
   end
 
-  private
-
-  def parse_player_name(player_tokens, split_by)
-    player_name = ''
-    player_tokens.each_with_index do |token, index|
-      return player_name if token == split_by
-
-      player_name += token if index.zero?
-      player_name = "#{player_name} #{token}" if index.positive?
-    end
+  def id
+    @id ||= @tokens[3]
   end
 end

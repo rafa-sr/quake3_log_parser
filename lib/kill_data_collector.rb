@@ -12,7 +12,7 @@ class KillDataCollector
   end
 
   def add(log_line)
-    return unless log_line.valid_kill_line?
+    return unless log_line.kill_line?
 
     @total_kills += 1
     if log_line.killer_player == WORLD || log_line.death_player == log_line.killer_player

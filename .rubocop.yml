@@ -24,6 +24,9 @@ Style/SlicingWithRange:
   Enabled: true
 Layout/HashAlignment:
   EnforcedColonStyle: table
+Layout/LineLength:
+  Exclude:
+    - "**/shared/**.rb"
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
 Layout/SpaceAroundMethodCallOperator:
@@ -37,6 +40,7 @@ Lint/DeprecatedOpenSSLConstant:
 Metrics/ModuleLength:
   Exclude:
     - "**/*_spec.rb"
+    -
 
 Metrics/BlockLength:
   Exclude:

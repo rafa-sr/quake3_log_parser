@@ -14,7 +14,9 @@ end
 
 ENV['ENV'] = 'test'
 
+
 require File.expand_path('../../lib/boot.rb', __FILE__)
+require File.expand_path('../shared/log_lines_shared_context.rb', __FILE__)
 
 RSpec.configure do |conf|
   conf.order = :random

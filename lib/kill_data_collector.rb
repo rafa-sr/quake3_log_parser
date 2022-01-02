@@ -4,6 +4,7 @@ class KillDataCollector
   attr_accessor :total_kills, :kills_scoreboard, :players
 
   WORLD = 'world'
+
   def initialize
     @total_kills = 0
     @kills_scoreboard = {}

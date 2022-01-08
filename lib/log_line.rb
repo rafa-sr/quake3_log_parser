@@ -6,9 +6,10 @@ class LogLine
   WORDS_REGEX = /\w+/
   KILL = 'Kill'
   CLIENT_CONNECT = 'ClientConnect'
+  CLIENT_DISCONNECT = 'ClientDisconnect'
   CLIENT_NAME_CHANGED = 'ClientUserinfoChanged'
   CLIENT_BEGIN = 'ClientBegin'
-  CLIENT_EVENTS = [CLIENT_CONNECT, CLIENT_NAME_CHANGED, CLIENT_BEGIN].freeze
+  CLIENT_EVENTS = [CLIENT_CONNECT, CLIENT_NAME_CHANGED, CLIENT_BEGIN, CLIENT_DISCONNECT].freeze
 
   def initialize(line)
     @line = line

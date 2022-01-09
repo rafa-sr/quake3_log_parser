@@ -2,18 +2,26 @@
 
 shared_context 'when game processor' do
   include_context 'when log lines'
+  let(:game_processor) { GameProcessor.new }
+
   let(:client_2_begun) do
-    game_processor = GameProcessor.new
-    line = ClientLogLine.new(connect_line)
-    game_processor.process_client(line)
-    game_processor
+    begun2_lines.each do |line|
+      line = ClientLogLine.new(line)
+      game_processor.process(line)
+    end
+  end
+
+  let(:client_3_begun) do
+    begun3_lines.each do |line|
+      line = ClientLogLine.new(line)
+      game_processor.process(line)
+    end
   end
 
   let(:reconnect_name_change) do
-    game_processor = GameProcessor.new
     name_change_array.each do |connect_line|
       line = ClientLogLine.new(connect_line)
-      game_processor.process_client(line)
+      game_processor.process(line)
     end
     game_processor
   end

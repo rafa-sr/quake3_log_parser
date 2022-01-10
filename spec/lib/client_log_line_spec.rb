@@ -31,6 +31,20 @@ describe ClientLogLine do
     end
   end
 
+  describe '#parse_name' do
+    it 'return the name of the client' do
+      client_log = described_class.new(name_line)
+
+      expect(client_log.name).to eq 'Oootsimo'
+    end
+
+    it 'return the name of the client with spaces' do
+      client_log = described_class.new(name_line_with_spaces)
+
+      expect(client_log.name).to eq 'Dono da Bola'
+    end
+  end
+
   describe '#begin?' do
     it 'return true when is clientbegin event' do
       client_log = described_class.new(begin_line)

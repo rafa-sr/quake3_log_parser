@@ -6,7 +6,7 @@ describe LogLine do
   include_context 'when log lines'
   describe '#event' do
     it 'return the Kill event that trigger the log' do
-      log_line = described_class.new(kill_line2)
+      log_line = described_class.new(kill2_line)
 
       expect(log_line.event).to eq 'Kill'
     end
@@ -21,7 +21,7 @@ describe LogLine do
 
   describe '#kill_line?' do
     it 'return true when the event of the log is a kill' do
-      log_line = described_class.new(kill_line2)
+      log_line = described_class.new(kill2_line)
 
       expect(log_line.kill_line?).to be true
     end

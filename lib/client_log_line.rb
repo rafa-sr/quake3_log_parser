@@ -18,4 +18,16 @@ class ClientLogLine < LogLine
 
     false
   end
+
+  def disconnect?
+    return true if event == LogLine::CLIENT_DISCONNECT
+
+    false
+  end
+
+  def name
+    start = line.index('n\\') + 2
+    finish = line.index('\\t') - 1
+    @name ||= line[start..finish]
+  end
 end

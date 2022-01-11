@@ -3,8 +3,6 @@
 class GameProcessor
   attr_reader :disconnected_clients, :connected_clients
 
-  WORLD = 'world'
-
   def initialize
     @total_kills = 0
     @kills_scoreboard = {}

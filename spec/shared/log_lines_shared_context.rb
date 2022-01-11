@@ -23,6 +23,7 @@ shared_context 'when log lines' do
   let(:connect3_line) { ' 11:23 ClientConnect: 3' }
   let(:user3_info_change) { ' 11:23 ClientUserinfoChanged: 3 n\Isgalamido\t\0\model\razor/id\hmodel\razor/id\g_redteam\\g_blueteam\\c1\3\c2\5\hc\100\w\0\l\0\tt\0\tl\0' }
   let(:begin3_line) { ' 11:23 ClientBegin: 3' }
+  let(:self3_kill_line) { '  1:05 Kill: 3 3 13: Isgalamido killed Isgalamido by MOD_BFG_SPLASH' }
 
   let(:begun3_lines) { [connect3_line, user3_info_change, begin3_line] }
 end

@@ -2,7 +2,7 @@
 
 class KillLogLine < LogLine
   WORLD_ID = '1022'
-
+  WORLD = 'world'
   def killer_id
     id
   end

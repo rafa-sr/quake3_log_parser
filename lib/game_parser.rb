@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class GameProcessor
+class GameParser
   attr_reader :disconnected_clients, :connected_clients
 
   def initialize
@@ -23,5 +23,22 @@ class GameProcessor
 
   def total_kills
     @kill_processor.total_kills
+  end
+
+  def kills
+    kills = {}
+    players.each do |player|
+      kills.merge!({ player.name => player.kills })
+    end
+    kills
+  end
+
+  def players_name
+    players.map(&:name)
+  end
+
+  def print
+    { players: players_name,
+      kills:   kills }
   end
 end

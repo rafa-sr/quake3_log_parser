@@ -9,14 +9,16 @@ class ClientProcessor
   end
 
   def process(log_line)
-    # return unless log_line.client?
-    connect_client(log_line.id) if log_line.connect?
+    return unless log_line.client_line?
 
-    user_info_change(log_line.name, log_line.id) if log_line.name_changed?
+    client_line = ClientLogLine.new(log_line.line)
+    connect_client(client_line.id) if client_line.connect?
+
+    user_info_change(client_line.name, client_line.id) if client_line.name_changed?
 
     # player_begin(log_line.id) if log_line.begin?
 
-    disconnect_client(log_line.id) if log_line.disconnect?
+    disconnect_client(client_line.id) if client_line.disconnect?
   end
 
   def connect_client(id)

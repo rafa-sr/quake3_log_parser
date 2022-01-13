@@ -38,7 +38,8 @@ class GameParser
   end
 
   def print
-    { players: players_name,
-      kills:   kills }
+    { total_kills: total_kills,
+      players:     players_name,
+      kills:       kills }
   end
 end

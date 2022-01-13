@@ -12,6 +12,8 @@ describe GameParser do
      { score: -4, client: 7, name: 'Mal' }]
   end
 
+  let(:total_kills) { 89 }
+
   context 'when process entire match' do
     let(:game_parser) { described_class.new }
 
@@ -49,7 +51,7 @@ describe GameParser do
 
     describe '#total_kills' do
       it 'return all the kills' do
-        expect(game_parser.total_kills).to eq 89
+        expect(game_parser.total_kills).to eq total_kills
       end
     end
 
@@ -72,6 +74,10 @@ describe GameParser do
 
       it 'return hash that include {players:} as a key and an array with the name of the players as a value' do
         expect(game_parser.print[:players]).to match_array result_names
+      end
+
+      it 'return hash that include {total_kills:} as a key and the total of kills as a value' do
+        expect(game_parser.print[:total_kills]).to eq total_kills
       end
     end
   end

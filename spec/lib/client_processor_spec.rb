@@ -3,105 +3,130 @@
 describe ClientProcessor do
   include_context 'when log lines'
   include_context 'when game processor'
-  describe '#process' do
-    let(:game_parser) do
-      game_parser = described_class.new
-      line = ClientLogLine.new(connect_line)
-      game_parser.process(line)
-      game_parser
+  let(:id) { 2 }
+  let(:name) { 'Zeh' }
+  let(:client_processor) { described_class.new }
+
+  describe '#connect_client' do
+    before do
+      client_processor.connect_client(id)
     end
 
-    context 'when client Connect' do
-      it 'create a client and add it to the connectes list' do
-        expect(game_parser.connected_clients.first.id).to eq '2'
-      end
+    it 'put it on the connected list' do
+      client_index = client_processor.find_connected_client(id: id)
 
-      it 'only create clients with different id' do
-        player1 = game_parser.connected_clients.first
-        line = ClientLogLine.new(connect_line)
+      expect(client_index).not_to be nil
+    end
+  end
 
-        game_parser.process(line)
-
-        expect(game_parser.connected_clients.first).to be player1
-      end
-
-      it 'begin on false for a fresh connected client' do
-        # TODO: delete looks likes is not needed
-        # line = ClientLogLine.new(begin_line)
-
-        # game_parser.process_client(line)
-
-        # expect(game_parser.players.first.begin?).to eq false
-      end
+  describe '#disconnect_client' do
+    before do
+      client_processor.connect_client(id)
+      client_processor.user_info_change(name, id)
+      client_processor.disconnect_client(id)
     end
 
-    context 'when client Disconnect' do
-      it 'add it to the disconnected client list' do
-        line = ClientLogLine.new(disconnect_line)
-        game_parser.process(line)
+    it 'put it on the disconnected list' do
+      client_index = client_processor.find_disconnected_client(id: id)
 
-        expect(game_parser.disconnected_clients.length).to eq 1
-      end
-
-      it 'remove the client 2 from the connected client list' do
-        line = ClientLogLine.new(disconnect_line)
-        game_parser.process(line)
-
-        expect(game_parser.connected_clients.length).to eq 0
-      end
+      expect(client_index).not_to be nil
     end
 
-    context 'when client connect, disconnect and connect' do
+    it 'pop it the connected list' do
+      client_index = client_processor.find_connected_client(id: id)
+
+      expect(client_index).to be nil
+    end
+  end
+
+  describe '#user_info_change' do
+    before do
+      client_processor.connect_client(id)
+      client_processor.user_info_change(name, id)
+    end
+
+    it 'change tha name of the client' do
+      client_index = client_processor.find_connected_client(id: id)
+
+      expect(client_processor.connected_clients[client_index].name).to be name
+    end
+
+    context 'when reconnected client' do
       before do
-        line_disco = ClientLogLine.new(disconnect_line)
-        line_connect = ClientLogLine.new(connect_line)
-        game_parser.process(line_disco)
-        game_parser.process(line_connect)
+        client_processor.disconnect_client(id)
+        client_processor.connect_client(id)
+        client_processor.user_info_change(name, id)
       end
 
-      it 'add it again to the connected client list' do
-        expect(game_parser.connected_clients.length).to eq 1
-      end
-    end
+      it 'put it back on the connected list' do
+        client_index = client_processor.find_connected_client(id: id)
 
-    context 'when ClientUserinfoChanged' do
-      it 'initialize the name if there is no name' do
-        line = ClientLogLine.new(user_info_change)
-
-        game_parser.process(line)
-
-        expect(game_parser.connected_clients.first.name).to eq 'Oootsimo'
+        expect(client_index).not_to be nil
       end
 
-      it 'and process the same name twice, leave the same name' do
-        line = ClientLogLine.new(user_info_change)
+      it 'pop it the connected list' do
+        client_index = client_processor.find_disconnected_client(id: id)
 
-        game_parser.process(line)
-        game_parser.process(line)
-
-        expect(game_parser.connected_clients.first.name).to eq 'Oootsimo'
-      end
-
-      it 'from a disconnected client, pop it from the disconnected list' do
-        game_parser = reconnect_name_change
-
-        expect(game_parser.find_disconnected_client(name: 'Dono da Bola')).to be nil
-      end
-
-      it 'from a disconnected client, put it back on the connected list' do
-        game_parser = reconnect_name_change
-
-        expect(game_parser.find_connected_client(name: 'Dono da Bola')).not_to be nil
+        expect(client_index).to be nil
       end
     end
 
-    it 'begin on true when ClientBegin' do
-      # TODO: delete looks like is not needed
-      # line = ClientLogLine.new(begin_line)
+    context 'when reconnected client with different id' do
+      let(:changed_id) { 4 }
 
-      # game_parser.process_client(line)
+      before do
+        client_processor.disconnect_client(id)
+        client_processor.connect_client(changed_id)
+        client_processor.user_info_change(name, changed_id)
+      end
 
-      # expect(game_parser.players.first.begin?).to eq true
+      it 'remove old client from the connected list' do
+        expect(client_processor.connected_clients.length).to eq 1
+      end
+
+      it 'put it back on the connected list' do
+        client_index = client_processor.find_connected_client(id: changed_id)
+
+        expect(client_index).not_to be nil
+      end
+
+      it 'pop it the connected list' do
+        client_index = client_processor.find_disconnected_client(id: changed_id)
+
+        expect(client_index).to be nil
+      end
+    end
+  end
+
+  describe '#process' do
+    context 'when process a lots of connections and reconnections' do
+      before do
+        File.foreach(File.join(ROOT, 'spec/fixture/clients.log')) do |line|
+          client_processor.process(LogLine.new(line))
+        end
+      end
+
+      it 'keep clean the connected clients list (remove old clients)' do
+        expect(client_processor.connected_clients.length).to eq 6
+      end
+    end
+  end
+
+  describe '#update_connected_client' do
+    before do
+      client_processor.connect_client(id)
+    end
+
+    it 'update the client name' do
+      client_processor.update_connected_client({ name: 'foo' }, id)
+
+      expect(client_processor.find_connected_client(name: 'foo')).not_to be nil
+    end
+
+    it 'update the client kills' do
+      client_processor.update_connected_client({ kills: 99 }, id)
+      client_index = client_processor.find_connected_client(id: id)
+      expect(client_processor.connected_clients[client_index].kills).to eq 99
     end
   end
 end

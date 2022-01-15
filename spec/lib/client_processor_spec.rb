@@ -106,7 +106,7 @@ describe ClientProcessor do
         end
       end
 
-      it 'return a list of with six connected clients' do
+      it 'keep clean the connected clients list (remove old clients)' do
         expect(client_processor.connected_clients.length).to eq 6
       end
     end

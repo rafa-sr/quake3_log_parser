@@ -16,8 +16,6 @@ class ClientProcessor
 
     user_info_change(client_line.name, client_line.id) if client_line.name_changed?
 
-    # player_begin(log_line.id) if log_line.begin?
-
     disconnect_client(client_line.id) if client_line.disconnect?
   end
 
@@ -29,23 +27,13 @@ class ClientProcessor
   def user_info_change(name, id)
     client_index = find_disconnected_client(name: name)
     change_name(name, id) if client_index.nil?
-    reconnect_client(client_index) unless client_index.nil?
-  end
-
-  def change_name(name, id)
-    client_index = find_connected_client(id: id)
-    @connected_clients[client_index].name = name if @connected_clients[client_index].name != name
+    reconnect_client(client_index, id) unless client_index.nil?
   end
 
   def disconnect_client(id)
     client_index = find_connected_client(id: id)
     client = @connected_clients.delete_at(client_index)
     @disconnected_clients.append(client)
-  end
-
-  def reconnect_client(client_index)
-    client = @disconnected_clients.delete_at(client_index)
-    @connected_clients.append(client)
   end
 
   def find_connected_client(id: nil, name: nil)
@@ -58,10 +46,16 @@ class ClientProcessor
 
   private
 
-  def player_begin(id)
-    @players.each do |clients|
-      clients.begin_state = true if clients.id == id
-    end
+  def reconnect_client(client_index, id)
+    client = @disconnected_clients.delete_at(client_index)
+    connected_client_index = find_connected_client(id: id)
+    @connected_clients[connected_client_index].name = client.name
+    @connected_clients[connected_client_index].kills = client.kills
+  end
+
+  def change_name(name, id)
+    client_index = find_connected_client(id: id)
+    @connected_clients[client_index].name = name if @connected_clients[client_index].name != name
   end
 
   def find_client_by(client_list, id: nil, name: nil)

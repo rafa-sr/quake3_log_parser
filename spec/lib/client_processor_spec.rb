@@ -111,4 +111,22 @@ describe ClientProcessor do
       end
     end
   end
+
+  describe '#update_connected_client' do
+    before do
+      client_processor.connect_client(id)
+    end
+
+    it 'update the client name' do
+      client_processor.update_connected_client({ name: 'foo' }, id)
+
+      expect(client_processor.find_connected_client(name: 'foo')).not_to be nil
+    end
+
+    it 'update the client kills' do
+      client_processor.update_connected_client({ kills: 99 }, id)
+      client_index = client_processor.find_connected_client(id: id)
+      expect(client_processor.connected_clients[client_index].kills).to eq 99
+    end
+  end
 end

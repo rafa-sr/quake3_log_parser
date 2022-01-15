@@ -26,7 +26,7 @@ class ClientProcessor
 
   def user_info_change(name, id)
     client_index = find_disconnected_client(name: name)
-    change_name(name, id) if client_index.nil?
+    update_connected_client({ name: name }, id) if client_index.nil?
     reconnect_client(client_index, id) unless client_index.nil?
   end
 
@@ -44,18 +44,17 @@ class ClientProcessor
     find_client_by(@disconnected_clients, id: id, name: name)
   end
 
+  def update_connected_client(options, id)
+    client_index = find_connected_client(id: id)
+    @connected_clients[client_index].name = options[:name] if options[:name]
+    @connected_clients[client_index].kills = options[:kills] if options[:kills]
+  end
+
   private
 
   def reconnect_client(client_index, id)
     client = @disconnected_clients.delete_at(client_index)
-    connected_client_index = find_connected_client(id: id)
-    @connected_clients[connected_client_index].name = client.name
-    @connected_clients[connected_client_index].kills = client.kills
-  end
-
-  def change_name(name, id)
-    client_index = find_connected_client(id: id)
-    @connected_clients[client_index].name = name if @connected_clients[client_index].name != name
+    update_connected_client({ name: client.name, kills: client.kills }, id)
   end
 
   def find_client_by(client_list, id: nil, name: nil)

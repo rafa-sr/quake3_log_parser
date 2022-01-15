@@ -22,7 +22,6 @@ class QuakeLogFileParser
 
       @game_parser.process(log_line) if @active_match
     end
-    byebug
   end
 
   def start_match

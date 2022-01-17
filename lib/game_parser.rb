@@ -40,7 +40,8 @@ class GameParser
   def print
     { total_kills: total_kills,
       players:     players_name,
-      kills:       kills }
+      kills:       kills,
+      ranking:     ranking }
   end
 
   def ranking

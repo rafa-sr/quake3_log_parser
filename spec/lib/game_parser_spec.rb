@@ -79,6 +79,10 @@ describe GameParser do
       it 'return hash that include {total_kills:} as a key and the total of kills as a value' do
         expect(game_parser.print[:total_kills]).to eq total_kills
       end
+
+      it 'return hash that include {ranking:} as a key and the total of kills as a value' do
+        expect(game_parser.print[:ranking]).to match_array results
+      end
     end
 
     describe '#ranking' do

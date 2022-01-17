@@ -5,11 +5,11 @@ describe GameParser do
   include_context 'when game processor'
   let(:results) do
     [{ score: 20, client: 3, name: 'Isgalamido' },
-     { score: 14, client: 6, name: 'Oootsimo' },
-     { score: 12, client: 2, name: 'Zeh' },
-     { score: 8, client: 5, name: 'Assasinu Credi' },
-     { score: -1, client: 4, name: 'Dono da Bola' },
-     { score: -4, client: 7, name: 'Mal' }]
+     { score: 14, client: 2, name: 'Oootsimo' },
+     { score: 12, client: 4, name: 'Zeh' },
+     { score: 8, client: 7, name: 'Assasinu Credi' },
+     { score: -1, client: 5, name: 'Dono da Bola' },
+     { score: -4, client: 6, name: 'Mal' }]
   end
 
   let(:total_kills) { 89 }
@@ -78,6 +78,12 @@ describe GameParser do
 
       it 'return hash that include {total_kills:} as a key and the total of kills as a value' do
         expect(game_parser.print[:total_kills]).to eq total_kills
+      end
+    end
+
+    describe '#ranking' do
+      it 'return a list ordered by the score in descendant way that include (score: client: name:) has a keys' do
+        expect(game_parser.ranking).to eq results
       end
     end
   end

@@ -26,11 +26,11 @@ class GameParser
   end
 
   def kills
-    kills = {}
+    players_kills = {}
     players.each do |player|
-      kills.merge!({ player.name => player.kills })
+      players_kills.merge!({ player.name => player.kills })
     end
-    kills
+    players_kills
   end
 
   def players_name
@@ -41,5 +41,19 @@ class GameParser
     { total_kills: total_kills,
       players:     players_name,
       kills:       kills }
+  end
+
+  def ranking
+    players_hash.sort_by { |player| player[:score] }.reverse!
+  end
+
+  private
+
+  def players_hash
+    players_table = []
+    players.each do |player|
+      players_table.append({ score: player.kills, client: player.id.to_i, name: player.name })
+    end
+    players_table
   end
 end

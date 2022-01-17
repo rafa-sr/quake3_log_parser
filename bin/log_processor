@@ -5,8 +5,10 @@ boot_file_path = File.expand_path('../lib/boot.rb', __dir__)
 require boot_file_path
 
 LOGS_DIR = '/tmp/'
+FILE = 'qgames.log'
+FILE_PATH = LOGS_DIR + FILE
 LOGGER = Logger.new($stdout)
-ROOT = File.expand_path('../..', __FILE__)
+ROOT = File.expand_path('..', __dir__)
 
 def log_reader(file)
   puts "Processing #{file}"
@@ -16,7 +18,6 @@ def log_reader(file)
   end
   file_parser.print
   puts "Log #{file} processed correctly"
-  #FileUtils.rm(file)
   puts "#{Time.now} -- Finished. Exiting now."
 rescue StandardError => e
   LOGGER.error("#{e.class}: #{e.message}")
@@ -25,7 +26,7 @@ rescue StandardError => e
 end
 
 def run
-  log_reader('spec/fixture/qgames.log')
+  log_reader(FILE_PATH)
 end
 
 run

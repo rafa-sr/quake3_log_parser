@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+boot_file_path = File.expand_path('../lib/boot.rb', __dir__)
+require boot_file_path
+
+LOGS_DIR = '/tmp/'
+FILE = 'qgames.log'
+FILE_PATH = LOGS_DIR + FILE
+LOGGER = Logger.new($stdout)
+ROOT = File.expand_path('..', __dir__)
+
+def log_reader(file)
+  puts "Processing #{file}"
+  file_parser = QuakeLogFileParser.new
+  File.foreach(File.join(ROOT, file)) do |line|
+    file_parser.parse line
+  end
+  file_parser.print
+  puts "Log #{file} processed correctly"
+  puts "#{Time.now} -- Finished. Exiting now."
+rescue StandardError => e
+  LOGGER.error("#{e.class}: #{e.message}")
+  LOGGER.error(e.backtrace)
+  exit 1
+end
+
+def run
+  log_reader(FILE_PATH)
+end
+
+run

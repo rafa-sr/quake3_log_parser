@@ -2,11 +2,10 @@
 
 require 'bundler'
 Bundler.require :default
+
 require 'rubygems'
 require 'fileutils'
-
 require 'json'
-
 require 'logger'
 
 require_all 'lib/log_line.rb'

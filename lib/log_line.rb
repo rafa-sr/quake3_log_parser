@@ -10,6 +10,11 @@ class LogLine
   CLIENT_NAME_CHANGED = 'ClientUserinfoChanged'
   CLIENT_BEGIN = 'ClientBegin'
   CLIENT_EVENTS = [CLIENT_CONNECT, CLIENT_NAME_CHANGED, CLIENT_BEGIN, CLIENT_DISCONNECT].freeze
+  SHUT_DOWN = 'ShutdownGame'
+  EXIT = 'Exit'
+  SPLIT_LINE = '------------------------------------------------------------'
+  ENDING_EVENT = [EXIT, SHUT_DOWN].freeze
+  INIT_GAME = 'InitGame'
 
   def initialize(line)
     @line = line
@@ -25,8 +30,21 @@ class LogLine
   end
 
   def client_line?
-    CLIENT_EVENTS.each { |client_events| return true if event == client_events }
+    CLIENT_EVENTS.each { |client_event| return true if event == client_event }
     false
+  end
+
+  def end_line?
+    ENDING_EVENT.each { |ending_event| return true if event == ending_event }
+    split_line?
+  end
+
+  def init_game?
+    event == INIT_GAME
+  end
+
+  def split_line?
+    @line.split[1] == SPLIT_LINE
   end
 
   def id

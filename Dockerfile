@@ -10,4 +10,3 @@ bundle install --system --without development test
 ADD . /app
 ENV PATH="/app/bin:${PATH}"
 
-CMD ["log_processor"]

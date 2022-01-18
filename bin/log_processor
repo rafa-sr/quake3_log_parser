@@ -4,9 +4,20 @@
 boot_file_path = File.expand_path('../lib/boot.rb', __dir__)
 require boot_file_path
 
-LOGS_DIR = '/tmp/'
-FILE = 'qgames.log'
-FILE_PATH = LOGS_DIR + FILE
+def load_argumemts
+  options = {}
+  OptionParser.new do |opts|
+    opts.banner = 'Usagee: lob_processor [options]'
+    opts.on('-f', '--file_path FILE_PATH', 'the path of the file') { |v| options[:file_path] = v }
+
+  end.parse!
+  options
+end
+
+ARGS = load_argumemts
+raise OptionParser::MissingArgument, 'Missing file_path' if ARGS[:file_path].nil?
+
+FILE_PATH = ARGS[:file_path]
 LOGGER = Logger.new($stdout)
 ROOT = File.expand_path('..', __dir__)
 

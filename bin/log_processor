@@ -19,9 +19,9 @@ def load_argumemts
 end
 
 ARGS = load_argumemts
-raise OptionParser::MissingArgument, 'Missing file_path' if ARGS[:file_path].nil?
-
-FILE_PATH = ARGS[:file_path]
+DEFAULT_PATH = '/tmp/qgames.log'
+FILE_PATH = DEFAULT_PATH  if ARGS[:file_path].nil?
+FILE_PATH = ARGS[:file_path] unless ARGS[:file_path].nil?
 DEATH_REPORT = ARGS[:death_report]
 LOGGER = Logger.new($stdout)
 ROOT = File.expand_path('..', __dir__)

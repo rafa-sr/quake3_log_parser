@@ -10,3 +10,7 @@ bundle install --system --without development test
 ADD . /app
 ENV PATH="/app/bin:${PATH}"
 
+ENV FILE_PATH="tmp/qgames.log"
+ENV DEATH_REPORT="-d"
+
+CMD ["sh", "-c","log_processor ${DEATH_REPORT} -f ${FILE_PATH}"]

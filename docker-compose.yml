@@ -3,7 +3,7 @@ services:
   job:
     build: .
     environment:
-      - FILE_PATH=spec/fixture/qgames.log
+      - FILE_PATH=tmp/qgames.log
       - DEATH_REPORT=-d
     command: >
       sh -c "log_processor $${DEATH_REPORT} -f $${FILE_PATH}"

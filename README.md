@@ -53,8 +53,8 @@ But there's more options, you'll see a table below with the options:
 
 | Option                                                    | Command                                                           |
 |-----------------------------------------------------------|-------------------------------------------------------------------|
-| Only one file                                             | ```bundle exec rspec spec/controllers/filter_rules_spec.rb```     |
-| Only one specific describe/context/it (get line number)   | ```bundle exec rspec spec/controllers/filter_rules_spec.rb:235``` |
+| Only one file                                             | ```bundle exec rspec spec/lib/game_parser_spec.rb```     |
+| Only one specific describe/context/it (get line number)   | ```bundle exec rspec spec/lib/game_parser_spec.rb:70``` |
 
 
 # Software Engineer test

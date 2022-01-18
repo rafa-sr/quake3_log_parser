@@ -56,7 +56,7 @@ But there's more options, you'll see a table below with the options:
 | Only one file                                             | ```bundle exec rspec spec/lib/game_parser_spec.rb```     |
 | Only one specific describe/context/it (get line number)   | ```bundle exec rspec spec/lib/game_parser_spec.rb:70``` |
 
-
+#------------------------------------------------------------------------------------------------------------------------
 # Software Engineer test
 
 > Truth can only be found in one place: the code. <br/>

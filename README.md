@@ -6,10 +6,9 @@
 * [Qauke 3 log parser](#Qauke-3-log-parser)
     * [Introduction to Quake 3 log parser](#introduction-to-quake-3-log-parser)
     * [Prerequisites](#prerequisites)
-    * [Install and run (manually)](#install-and-run-(manually))
-    * [Install and run (Docker)](#install-and-run-(docker))
+    * [Install and run manually](#install-and-run-(manually))
+    * [Install and run with Docker](#install-and-run-(docker))
     * [How to TEST](#how-to-test)
-    * [Services under Docker](#services-under-docker)
 
 <p align="center">
   <p align="center">
@@ -28,7 +27,7 @@ For manual installation:
 For Docker installation:
 * [Docker](https://www.docker.com/products/docker-desktop)
 
-## Install and run (manually)
+## Install and run manually
 
 Having fulfilled all the prerequisites for this kind of installation you will need to do some steps in order to setup correctly the project.
 
@@ -36,7 +35,7 @@ Steps to proceed:
 * ```bundle install``` Will install all dependencies.
 * ```./bin/log_processor``` Will run the script.
 
-## Install and run (Docker)
+## Install and run with Docker
 
 Also with Docker we can get the project up and run it.
 

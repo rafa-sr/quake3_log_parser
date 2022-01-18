@@ -6,8 +6,8 @@
 * [Qauke 3 log parser](#Qauke-3-log-parser)
     * [Introduction to Quake 3 log parser](#introduction-to-quake-3-log-parser)
     * [Prerequisites](#prerequisites)
-    * [Install and run manually](#install-and-run-(manually))
-    * [Install and run with Docker](#install-and-run-(docker))
+    * [Install and run manually](#install-and-run-manually)
+    * [Install and run with Docker](#install-and-run-with-docker)
     * [How to TEST](#how-to-test)
 
 <p align="center">

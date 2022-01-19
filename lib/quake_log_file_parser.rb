@@ -46,14 +46,14 @@ class QuakeLogFileParser
   def print_match(match, index)
     game_n = "game_#{index + 1}"
     game_to_print = { game_n => match }
-    json_match = JSON.pretty_generate(game_to_print)
-    puts json_match unless ENV['ENV'] == 'test'
+    json = JSON.pretty_generate(game_to_print)
+    puts json unless ENV['ENV'] == 'test'
   end
 
   def print_match_ranking(ranking, index)
     ranking_n = "game_#{index + 1}_ranking"
     ranking_to_print = { ranking_n => ranking }
-    json_ranking = JSON.generate(ranking_to_print, array_nl: "\n", space: ' ', indent: ' ')
-    puts json_ranking unless ENV['ENV'] == 'test'
+    json = JSON.generate(ranking_to_print, array_nl: "\n", space: ' ', indent: ' ')
+    puts json unless ENV['ENV'] == 'test'
   end
 end

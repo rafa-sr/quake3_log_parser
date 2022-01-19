@@ -1,0 +1,6 @@
+version: '3'
+services:
+  job:
+    build: .
+    command: >
+      sh -c "log_processor"

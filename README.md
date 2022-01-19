@@ -1,11 +1,3 @@
-
-Docker:
-
-docker build . -t log_processor
-docker-compose up
-for custom file
-docker-compose run -e FILE_PATH='spec/fixture/clients.log' job
-
 # Software Engineer test
 
 > Truth can only be found in one place: the code. <br/>

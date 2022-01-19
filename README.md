@@ -128,11 +128,3 @@ typedef enum {
 You are expected to submit a compacted git repository with the project through the form you received.
 
 Enjoy :)
-
-Steps to proceed:
-* ```docker-compose build``` Will build the image needed.
-
-* ```docker-compose up``` Will build the image needed. Will run script with the default [log](https://gist.github.com/cloudwalk-tests/be1b636e58abff14088c8b5309f575d8) file.
-
-* ```docker run -v <local_path_of_your_log_file>:/app/tmp/qgames.log log_processor``` Will run script with your local log file to work.
-

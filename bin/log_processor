@@ -4,7 +4,7 @@
 boot_file_path = File.expand_path('../lib/boot.rb', __dir__)
 require_relative boot_file_path
 
-def load_argumemts
+def load_arguments
   options = {}
   OptionParser.new do |opts|
     opts.banner = 'Usage: lob_processor [options]'
@@ -17,7 +17,7 @@ def load_argumemts
   options
 end
 
-ARGS = load_argumemts
+ARGS = load_arguments
 DEFAULT_PATH = '/tmp/qgames.log'
 FILE_PATH = DEFAULT_PATH
 FILE_PATH = ARGS[:file_path] unless ARGS[:file_path].nil?

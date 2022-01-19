@@ -40,8 +40,7 @@ class GameParser
   def print
     { total_kills: total_kills,
       players:     players_name,
-      kills:       kills,
-      ranking:     ranking }
+      kills:       kills }
   end
 
   def ranking
@@ -53,7 +52,7 @@ class GameParser
   def players_hash
     players_table = []
     players.each do |player|
-      players_table.append({ score: player.kills, name: player.name, client: player.id.to_i })
+      players_table.append({ score: player.kills, client: player.id.to_i, name: player.name })
     end
     players_table
   end

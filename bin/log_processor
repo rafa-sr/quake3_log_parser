@@ -18,8 +18,8 @@ def load_arguments
 end
 
 ARGS = load_arguments
-DEFAULT_PATH = '/log/qgames.log'
-FILE_PATH = DEFAULT_PATH if ARGS[:file_path].nil?
+DEFAULT_PATH = '/tmp/qgames.log'
+FILE_PATH = DEFAULT_PATH
 FILE_PATH = ARGS[:file_path] unless ARGS[:file_path].nil?
 LOGGER = Logger.new($stdout)
 ROOT = File.expand_path('..', __dir__)

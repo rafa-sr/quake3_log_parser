@@ -2,7 +2,5 @@ version: '3'
 services:
   job:
     build: .
-    environment:
-      - FILE_PATH=tmp/qgames.log
     command: >
-      sh -c "log_processor -f $${FILE_PATH}"
+      sh -c "log_processor"

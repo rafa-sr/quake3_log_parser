@@ -10,6 +10,4 @@ bundle install --system --without development test
 ADD . /app
 ENV PATH="/app/bin:${PATH}"
 
-ENV FILE_PATH="tmp/qgames.log"
-
-CMD ["sh", "-c","log_processor -f ${FILE_PATH}"]
+CMD ["log_processor"]

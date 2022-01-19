@@ -16,9 +16,8 @@ ENV['ENV'] = 'test'
 
 ROOT = File.expand_path('../..', __FILE__)
 require File.expand_path('../../lib/boot.rb', __FILE__)
+require File.expand_path('../../spec/helper/client_helper.rb', __FILE__)
 require File.expand_path('../shared/log_lines_shared_context.rb', __FILE__)
-require File.expand_path('../shared/game_parser_shared_context.rb', __FILE__)
-
 
 RSpec.configure do |conf|
   conf.order = :random

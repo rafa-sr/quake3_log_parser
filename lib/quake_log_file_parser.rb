@@ -36,7 +36,7 @@ class QuakeLogFileParser
     @matches.each_with_index do |match, index|
       ranking = match[:ranking]
       match.delete(:ranking)
-      print_match(match,index)
+      print_match(match, index)
       print_match_ranking(ranking, index)
     end
   end

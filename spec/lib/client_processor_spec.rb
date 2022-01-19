@@ -2,7 +2,6 @@
 
 describe ClientProcessor do
   include_context 'when log lines'
-  include_context 'when game processor'
   let(:id) { 2 }
   let(:name) { 'Zeh' }
   let(:client_processor) { described_class.new }

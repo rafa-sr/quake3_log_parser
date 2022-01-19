@@ -2,7 +2,6 @@
 
 describe GameParser do
   include_context 'when log lines'
-  include_context 'when game processor'
   let(:results) do
     [{ score: 20, client: 3, name: 'Isgalamido' },
      { score: 14, client: 2, name: 'Oootsimo' },

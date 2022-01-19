@@ -2,14 +2,13 @@
 # frozen_string_literal: true
 
 boot_file_path = File.expand_path('../lib/boot.rb', __dir__)
-require boot_file_path
+require_relative boot_file_path
 
 def load_argumemts
   options = {}
   OptionParser.new do |opts|
     opts.banner = 'Usage: lob_processor [options]'
     opts.on('-f', '--file_path FILE_PATH', 'the path of the file') { |v| options[:file_path] = v }
-    opts.on('-d', 'to print death report') { options[:death_report] = true }
     opts.on('-h', '--help', 'Prints this help') do
       puts opts
       exit
@@ -20,9 +19,8 @@ end
 
 ARGS = load_argumemts
 DEFAULT_PATH = '/tmp/qgames.log'
-FILE_PATH = DEFAULT_PATH if ARGS[:file_path].nil?
+FILE_PATH = DEFAULT_PATH
 FILE_PATH = ARGS[:file_path] unless ARGS[:file_path].nil?
-DEATH_REPORT = ARGS[:death_report]
 LOGGER = Logger.new($stdout)
 ROOT = File.expand_path('..', __dir__)
 
@@ -33,7 +31,6 @@ def log_reader(file)
     file_parser.parse line
   end
   file_parser.print
-  puts 'death report: ' if DEATH_REPORT
   puts "Log #{file} processed correctly"
   puts "#{Time.now} -- Finished. Exiting now."
 rescue StandardError => e

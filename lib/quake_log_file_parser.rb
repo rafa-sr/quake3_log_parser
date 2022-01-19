@@ -37,7 +37,7 @@ class QuakeLogFileParser
       game_n = "game_#{index + 1}"
       game_to_print = { game_n => match }
       json = JSON.pretty_generate(game_to_print)
-      puts json unless RSpec
+      puts json unless ENV['ENV'] == 'test'
     end
   end
 end

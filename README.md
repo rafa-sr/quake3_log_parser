@@ -45,7 +45,7 @@ Steps to proceed:
 
 * ```docker-compose up``` Will build the image needed. Will run script with the default [log](https://gist.github.com/cloudwalk-tests/be1b636e58abff14088c8b5309f575d8) file.
 
-* ```docker run -v <local_path_of_your_log_file>:/app/tmp/qgames.log log_processor``` Will run script with your local log file to work.
+* ```docker run -v <local_path_of_your_log_file>:/app/tmp/qgames.log quake3_log_parser_job``` Will run script with your local log file to work.
 
 ## How to TEST
 

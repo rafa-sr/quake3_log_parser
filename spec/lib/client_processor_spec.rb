@@ -6,6 +6,72 @@ describe ClientProcessor do
   let(:name) { 'Zeh' }
   let(:client_processor) { described_class.new }
 
+  describe '#process' do
+    context 'when is a client_line' do
+      before do
+        allow(client_processor).to receive(:connect_client)
+        allow(client_processor).to receive(:user_info_change)
+        allow(client_processor).to receive(:disconnect_client)
+      end
+
+      it 'call connect_client if log_line is client_connect' do
+        client_processor.process(LogLine.new(connect_line))
+
+        expect(client_processor).to have_received(:connect_client)
+      end
+
+      it 'call user_info_change if log_line is user_info_change' do
+        client_processor.process(LogLine.new(user_info_change))
+
+        expect(client_processor).to have_received(:user_info_change)
+      end
+
+      it 'call disconnect_client if log_line is disconnect_client' do
+        client_processor.process(LogLine.new(disconnect_line))
+
+        expect(client_processor).to have_received(:disconnect_client)
+      end
+    end
+
+    context 'when is not a client_line' do
+      before do
+        allow(client_processor).to receive(:connect_client)
+        allow(client_processor).to receive(:user_info_change)
+        allow(client_processor).to receive(:disconnect_client)
+      end
+
+      it 'do not call connect_client when log_line is client_connect' do
+        client_processor.process(LogLine.new(kill2_line))
+
+        expect(client_processor).not_to have_received(:connect_client)
+      end
+
+      it 'do not call user_info_change when log_line is user_info_change' do
+        client_processor.process(LogLine.new(kill2_line))
+
+        expect(client_processor).not_to have_received(:user_info_change)
+      end
+
+      it 'do not call disconnect_client when log_line is disconnect_client' do
+        client_processor.process(LogLine.new(kill2_line))
+
+        expect(client_processor).not_to have_received(:disconnect_client)
+      end
+    end
+
+    context 'when process a lots of connections and reconnections' do
+      before do
+        File.foreach(File.join(ROOT, 'spec/fixture/clients.log')) do |line|
+          client_processor.process(LogLine.new(line))
+        end
+      end
+
+      it 'keep clean the connected clients list (remove old clients)' do
+        expect(client_processor.connected_clients.length).to eq 6
+      end
+    end
+  end
+
   describe '#connect_client' do
     before do
       client_processor.connect_client(id)
@@ -93,20 +159,6 @@ describe ClientProcessor do
         client_index = client_processor.find_disconnected_client(id: changed_id)
 
         expect(client_index).to be nil
-      end
-    end
-  end
-
-  describe '#process' do
-    context 'when process a lots of connections and reconnections' do
-      before do
-        File.foreach(File.join(ROOT, 'spec/fixture/clients.log')) do |line|
-          client_processor.process(LogLine.new(line))
-        end
-      end
-
-      it 'keep clean the connected clients list (remove old clients)' do
-        expect(client_processor.connected_clients.length).to eq 6
       end
     end
   end

@@ -5,16 +5,19 @@ class GameParser
 
   def initialize
     @total_kills = 0
-    @kills_scoreboard = {}
     @players = []
-    @client_processor = ClientProcessor.new
-    @kill_processor = KillProcessor.new(@client_processor)
+    init_processors
   end
 
   def process(log_line)
-    # TODO: processors.map(&:process(log_line))
-    @client_processor.process(log_line) if log_line.client_line?
-    @kill_processor.process(log_line) if log_line.kill_line?
+    @processors.each { |processor| processor.process(log_line) }
+  end
+
+  def init_processors
+    @client_processor = ClientProcessor.new
+    @kill_processor = KillProcessor.new(@client_processor)
+    @processors = []
+    @processors << @client_processor << @kill_processor
   end
 
   def players
@@ -27,8 +30,8 @@ class GameParser
 
   def kills
     players_kills = {}
-    players.each do |player|
-      players_kills.merge!({ player.name => player.kills })
+    ranking.each do |player|
+      players_kills.merge!({ player[:name] => player[:score] })
     end
     players_kills
   end
@@ -43,16 +46,16 @@ class GameParser
       kills:       kills }
   end
 
+  private
+
   def ranking
     players_hash.sort_by { |player| player[:score] }.reverse!
   end
 
-  private
-
   def players_hash
     players_table = []
     players.each do |player|
-      players_table.append({ score: player.kills, client: player.id.to_i, name: player.name })
+      players_table.append({ score: player.kills, name: player.name, client: player.id.to_i })
     end
     players_table
   end

@@ -8,13 +8,30 @@ describe KillProcessor do
 
   before do
     begun2_lines.each do |line|
-      line = ClientLogLine.new(line)
-      client_processor.process(line)
+      log_line = ClientLogLine.new(line)
+      client_processor.process(log_line)
     end
 
     begun3_lines.each do |line|
-      line = ClientLogLine.new(line)
-      client_processor.process(line)
+      log_line = ClientLogLine.new(line)
+      client_processor.process(log_line)
+    end
+  end
+
+  describe '#process' do
+    it 'call add_kill when log_line is kill_line' do
+      expect(kill_processor).to receive(:add_kill)
+
+      kill_processor.process(LogLine.new(kill2_line))
+    end
+
+    it 'do not call add_kill when log_line is different from kill_line' do
+      expect(kill_processor).not_to receive(:add_kill)
+
+      begun3_lines.each do |line|
+        log_line = LogLine.new(line)
+        kill_processor.process(log_line)
+      end
     end
   end
 

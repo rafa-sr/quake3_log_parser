@@ -2,5 +2,7 @@ version: '3'
 services:
   job:
     build: .
+    volumes:
+    - ./:/tmp/reports
     command: >
       sh -c "log_processor"

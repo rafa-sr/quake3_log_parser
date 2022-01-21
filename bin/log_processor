@@ -7,7 +7,7 @@ require_relative boot_file_path
 def load_arguments
   options = {}
   OptionParser.new do |opts|
-    opts.banner = 'Usage: lob_processor [options]'
+    opts.banner = 'Usage: log_processor [options]'
     opts.on('-f', '--file_path FILE_PATH', 'the path of the file') { |v| options[:file_path] = v }
     opts.on('-h', '--help', 'Prints this help') do
       puts opts
@@ -33,10 +33,6 @@ def log_reader(file)
   end
   puts "Log #{file} processed correctly"
   file_parser.report
-rescue StandardError => e
-  LOGGER.error("#{e.class}: #{e.message}")
-  LOGGER.error(e.backtrace)
-  exit 1
 end
 
 def write_result(report)
@@ -44,12 +40,16 @@ def write_result(report)
   File.open("#{OUTPUT_DIR}/#{output_file}", 'w') do |f|
     f.write(JSON.pretty_generate(report))
   end
-  puts "#{Time.now} -- Finished report #{output_file} Exiting now."
+  puts "#{Time.now} -- Finished, written: #{output_file} file, Exiting now."
 end
 
 def run
   report = log_reader(LOG_FILE_PATH)
   write_result(report)
+rescue StandardError => e
+  LOGGER.error("#{e.class}: #{e.message}")
+  LOGGER.error(e.backtrace)
+  exit 1
 end
 
 FileUtils.mkdir_p OUTPUT_DIR

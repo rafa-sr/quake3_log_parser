@@ -32,18 +32,18 @@ class QuakeLogFileParser
     @active_match = false
   end
 
-  def print
+  def report
+    report = []
     @matches.each_with_index do |match, index|
-      print_match(match, index)
+      report << print_match(match, index)
     end
+    report
   end
 
   private
 
   def print_match(match, index)
     game_n = "game_#{index + 1}"
-    game_to_print = { game_n => match }
-    json = JSON.pretty_generate(game_to_print)
-    puts json
+    { game_n.to_sym => match }
   end
 end

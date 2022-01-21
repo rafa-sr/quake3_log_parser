@@ -34,10 +34,7 @@ class QuakeLogFileParser
 
   def print
     @matches.each_with_index do |match, index|
-      ranking = match[:ranking]
-      match.delete(:ranking)
       print_match(match, index)
-      print_match_ranking(ranking, index)
     end
   end
 
@@ -47,13 +44,6 @@ class QuakeLogFileParser
     game_n = "game_#{index + 1}"
     game_to_print = { game_n => match }
     json = JSON.pretty_generate(game_to_print)
-    puts json unless ENV['ENV'] == 'test'
-  end
-
-  def print_match_ranking(ranking, index)
-    ranking_n = "game_#{index + 1}_ranking"
-    ranking_to_print = { ranking_n => ranking }
-    json = JSON.generate(ranking_to_print, array_nl: "\n", space: ' ', indent: ' ')
-    puts json unless ENV['ENV'] == 'test'
+    puts json
   end
 end

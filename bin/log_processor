@@ -4,6 +4,11 @@
 boot_file_path = File.expand_path('../lib/boot.rb', __dir__)
 require_relative boot_file_path
 
+LOGGER = Logger.new($stdout)
+ROOT = File.expand_path('..', __dir__)
+OUTPUT_DIR = '/tmp/reports'
+DEFAULT_LOG_PATH = '/log/qgames.log'
+
 def load_arguments
   options = {}
   OptionParser.new do |opts|
@@ -18,12 +23,8 @@ def load_arguments
 end
 
 ARGS = load_arguments
-DEFAULT_LOG_PATH = '/log/qgames.log'
 LOG_FILE_PATH = DEFAULT_LOG_PATH if ARGS[:file_path].nil?
 LOG_FILE_PATH = ARGS[:file_path] unless ARGS[:file_path].nil?
-LOGGER = Logger.new($stdout)
-ROOT = File.expand_path('..', __dir__)
-OUTPUT_DIR = '/tmp/reports'
 
 def log_reader(file)
   puts "Processing #{file}"

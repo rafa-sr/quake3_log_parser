@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class QuakeLogFileParser
-  attr_reader :matches, :active_match, :game_parser
+  attr_reader :matches_report, :active_match, :game_parser
 
   def initialize
     @game_parser = nil
-    @matches = []
+    @matches_report = []
     @active_match = false
-    @ranking_score = []
+    @death_causes_report = []
   end
 
   def parse(line)
@@ -28,19 +28,33 @@ class QuakeLogFileParser
   end
 
   def finish_match
-    @matches << @game_parser.print
+    @matches_report << @game_parser.print
+    @death_causes_report << @game_parser.print_death_causes
     @active_match = false
   end
 
-  def report
-    report = []
-    @matches.each_with_index do |match, index|
-      report << print_match(match, index)
+  def matches_report
+    reports = []
+    @matches_report.each_with_index do |match, index|
+      reports << print_match(match, index)
     end
-    report
+    reports
+  end
+
+  def death_causes_report
+    death_reports = []
+    @death_causes_report.each_with_index do |death_report, index|
+      death_reports << print_death_causes(death_report, index)
+    end
+    death_reports
   end
 
   private
+
+  def print_death_causes(death_report, index)
+    means_of_death_n = "game-#{index + 1}"
+    { means_of_death_n.to_sym => death_report }
+  end
 
   def print_match(match, index)
     game_n = "game_#{index + 1}"

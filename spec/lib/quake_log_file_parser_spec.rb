@@ -12,7 +12,7 @@ describe QuakeLogFileParser do
         games += 1 if LogLine.new(line).init_game?
       end
 
-      expect(file_parser.matches.length).to eq games
+      expect(file_parser.matches_report.length).to eq games
     end
   end
 
@@ -24,7 +24,7 @@ describe QuakeLogFileParser do
     end
 
     it 'print all the matches (21)' do
-      expect(file_parser.report.length).to eq 21
+      expect(file_parser.matches_report.length).to eq 21
     end
   end
 
@@ -63,7 +63,7 @@ describe QuakeLogFileParser do
     end
 
     it 'append the match stats to the matches array' do
-      expect(file_parser.matches.last).to eq file_parser.game_parser.print
+      expect(file_parser.matches_report.last).to eq file_parser.game_parser.print
     end
   end
 end

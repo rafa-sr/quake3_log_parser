@@ -33,7 +33,7 @@ def log_reader(file)
     file_parser.parse line
   end
   puts "Log #{file} processed correctly"
-  file_parser.report
+  file_parser
 end
 
 def write_result(report)
@@ -46,8 +46,9 @@ def write_result(report)
 end
 
 def run
-  report = log_reader(LOG_FILE_PATH)
-  write_result(report)
+  result = log_reader(LOG_FILE_PATH)
+  write_result(result.matches_report)
+  write_result(result.death_causes_report)
 rescue StandardError => e
   LOGGER.error("#{e.class}: #{e.message}")
   LOGGER.error(e.backtrace)

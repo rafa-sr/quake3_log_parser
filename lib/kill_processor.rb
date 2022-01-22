@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
 class KillProcessor
-  WORLD = 'world'
-
   attr_reader :total_kills
 
   def initialize(client_processor)
     @total_kills = 0
-    @kills_scoreboard = {}
     @client_processor = client_processor
   end
 

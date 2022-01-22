@@ -37,10 +37,11 @@ end
 
 def write_result(report)
   output_file = "#{SecureRandom.urlsafe_base64}.json"
-  File.open("#{OUTPUT_DIR}/#{output_file}", 'w') do |f|
+  output_file_path = "#{OUTPUT_DIR}/#{output_file}"
+  File.open(output_file_path, 'w') do |f|
     f.write(JSON.pretty_generate(report))
   end
-  puts "#{Time.now} -- Finished, written: #{output_file} file, Exiting now."
+  puts "#{Time.now} -- Finished, generated: #{output_file_path} file, Exiting now."
 end
 
 def run

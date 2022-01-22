@@ -6,7 +6,7 @@ describe GameParser do
     [{ score: 20, name: 'Isgalamido' },
      { score: 14, name: 'Oootsimo' },
      { score: 12, name: 'Zeh' },
-     { score: 8,  name: 'Assasinu Credi' },
+     { score: 8, name: 'Assasinu Credi' },
      { score: -1, name: 'Dono da Bola' },
      { score: -4, name: 'Mal' }]
   end
@@ -78,6 +78,12 @@ describe GameParser do
 
       it 'return hash that include {total_kills:} as a key and the total of kills as a value' do
         expect(game_parser.print[:total_kills]).to eq total_kills
+      end
+    end
+
+    describe '#print_death_causes' do
+      it 'return hash that include {kill:} as a key and with player as a child keys and kills number as a value' do
+        expect(game_parser.print_death_causes).to include :kills_by_means
       end
     end
   end

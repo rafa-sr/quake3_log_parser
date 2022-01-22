@@ -4,10 +4,15 @@
 boot_file_path = File.expand_path('../lib/boot.rb', __dir__)
 require_relative boot_file_path
 
+LOGGER = Logger.new($stdout)
+ROOT = File.expand_path('..', __dir__)
+OUTPUT_DIR = '/tmp/reports'
+DEFAULT_LOG_PATH = '/log/qgames.log'
+
 def load_arguments
   options = {}
   OptionParser.new do |opts|
-    opts.banner = 'Usage: lob_processor [options]'
+    opts.banner = 'Usage: log_processor [options]'
     opts.on('-f', '--file_path FILE_PATH', 'the path of the file') { |v| options[:file_path] = v }
     opts.on('-h', '--help', 'Prints this help') do
       puts opts
@@ -18,11 +23,8 @@ def load_arguments
 end
 
 ARGS = load_arguments
-DEFAULT_PATH = '/log/qgames.log'
-FILE_PATH = DEFAULT_PATH if ARGS[:file_path].nil?
-FILE_PATH = ARGS[:file_path] unless ARGS[:file_path].nil?
-LOGGER = Logger.new($stdout)
-ROOT = File.expand_path('..', __dir__)
+LOG_FILE_PATH = DEFAULT_LOG_PATH if ARGS[:file_path].nil?
+LOG_FILE_PATH = ARGS[:file_path] unless ARGS[:file_path].nil?
 
 def log_reader(file)
   puts "Processing #{file}"
@@ -30,17 +32,27 @@ def log_reader(file)
   File.foreach(File.join(ROOT, file)) do |line|
     file_parser.parse line
   end
-  file_parser.print
   puts "Log #{file} processed correctly"
-  puts "#{Time.now} -- Finished. Exiting now."
+  file_parser.report
+end
+
+def write_result(report)
+  output_file = "#{SecureRandom.urlsafe_base64}.json"
+  output_file_path = "#{OUTPUT_DIR}/#{output_file}"
+  File.open(output_file_path, 'w') do |f|
+    f.write(JSON.pretty_generate(report))
+  end
+  puts "#{Time.now} -- Finished, generated: #{output_file_path} file, Exiting now."
+end
+
+def run
+  report = log_reader(LOG_FILE_PATH)
+  write_result(report)
 rescue StandardError => e
   LOGGER.error("#{e.class}: #{e.message}")
   LOGGER.error(e.backtrace)
   exit 1
 end
 
-def run
-  log_reader(FILE_PATH)
-end
-
+FileUtils.mkdir_p OUTPUT_DIR
 run

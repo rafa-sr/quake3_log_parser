@@ -6,7 +6,7 @@ describe GameParser do
     [{ score: 20, name: 'Isgalamido' },
      { score: 14, name: 'Oootsimo' },
      { score: 12, name: 'Zeh' },
-     { score: 8,  name: 'Assasinu Credi' },
+     { score: 8, name: 'Assasinu Credi' },
      { score: -1, name: 'Dono da Bola' },
      { score: -4, name: 'Mal' }]
   end
@@ -84,6 +84,14 @@ describe GameParser do
     describe '#print_death_causes' do
       it 'return hash that include {kills_by_means:}' do
         expect(game_parser.print_death_causes).to include :kills_by_means
+      end
+
+      it 'only return means of death with value > zero' do
+        values = []
+
+        game_parser.print_death_causes[:kills_by_means].each { |_key, value| values << value }
+
+        expect(values).not_to include 0
       end
     end
   end

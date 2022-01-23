@@ -53,6 +53,7 @@ class GameParser
   private
 
   def order_death_report
+    @kill_processor.death_causes.reject! { |_key, value| value.zero? }
     @kill_processor.death_causes.sort_by { |_key, val| val }.reverse!.to_h
   end
 

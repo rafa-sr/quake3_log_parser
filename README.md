@@ -1,10 +1,3 @@
-<p align="center">
-  <p align="center">
-    <img src="https://www.logolynx.com/images/logolynx/ac/ac9da73a0abe54ef2adb3d2b403545f5.jpeg"/>
-  </p>
-</p>
-
-
 ## Table of contents
 
 * [Quake 3 log parser](#Quake-3-log-parser)
@@ -13,6 +6,14 @@
     * [Install and run manually](#install-and-run-manually)
     * [Install and run with Docker](#install-and-run-with-docker)
     * [How to TEST](#how-to-test)
+
+
+<p align="center">
+  <p align="center">
+    <img src="https://www.logolynx.com/images/logolynx/ac/ac9da73a0abe54ef2adb3d2b403545f5.jpeg"/>
+  </p>
+</p>
+
 
 <p align="center">
   <p align="center">

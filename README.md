@@ -1,6 +1,6 @@
 # Introduction
 
-## Table of content
+## Table of contents
 
 
 * [Quake 3 log parser](#Quake-3-log-parser)

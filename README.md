@@ -29,7 +29,7 @@ For Docker installation:
 
 ## Install and run manually
 
-Having fulfilled all the prerequisites for this kind of installation you will need to do some steps in order to setup correctly the project.
+Having fulfilled all the prerequisites for this kind of installation you will need to follow some steps in order to setup correctly the project.
 
 Steps to proceed:
 * ```bundle install``` Will install all dependencies.

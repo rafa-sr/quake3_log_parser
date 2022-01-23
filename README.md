@@ -10,7 +10,7 @@
 
 <p align="center">
   <p align="center">
-    <img src="https://www.logolynx.com/images/logolynx/ac/ac9da73a0abe54ef2adb3d2b403545f5.jpeg"/>
+    <img src="https://www.logolynx.com/images/logolynx/ac/ac9da73a0abe54ef2adb3d2b403545f5.jpeg" width="400" height="300"/>
   </p>
 </p>
 
@@ -18,11 +18,6 @@
 <p align="center">
   <p align="center">
     <img src="https://img.shields.io/badge/ruby-3.0.0-ruby.svg?longCache=true&style=flat&label=ruby&logo=ruby"/>
-  </p>
-</p>
-<p align="center">
-  <p align="center">
-    <img src="https://spng.pngfind.com/pngs/s/565-5658243_quake-iii-logo-png-transparent-quake-iii-arena.png"/>
   </p>
 </p>
 

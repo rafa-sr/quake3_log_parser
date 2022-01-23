@@ -48,7 +48,7 @@ end
 def run
   file_parsed = process_log(LOG_FILE_PATH)
   write_reports(file_parsed.games_report, report_type: 'games')
-  write_reports(file_parsed.death_causes_games_report, report_type: 'deaths')
+  write_reports(file_parsed.deaths_report, report_type: 'deaths')
 rescue StandardError => e
   LOGGER.error("#{e.class}: #{e.message}")
   LOGGER.error(e.backtrace)

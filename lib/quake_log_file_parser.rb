@@ -41,7 +41,7 @@ class QuakeLogFileParser
     games_reports
   end
 
-  def death_causes_games_report
+  def deaths_report
     death_reports = []
     @death_causes_report.each_with_index do |death_report, index|
       death_reports << game_wrapper(death_report, index)

@@ -60,7 +60,7 @@ Two report files will be generated inside the container in the path /app/tmp/rep
 
 Tests are very important and are the basis of a good software project.
 
-If you want to check if tests are passing you only need to run the command ```bundle exec rspec```. This command will run ALL the tests.
+To execute all the tests run this command  ```bundle exec rspec```.
 
 But there's more options, you'll see a table below with the options:
 

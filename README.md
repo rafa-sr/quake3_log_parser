@@ -36,7 +36,7 @@ Steps to proceed:
 * ```./bin/log_processor``` Will run the script with the default [log](https://gist.github.com/cloudwalk-tests/be1b636e58abff14088c8b5309f575d8) file.
 * ```./bin/log_processor 'file_path'``` Will run the script with your local log file.
 
-As a result two report files will be generated inside ./tmp/reports.
+As a result two report files will be generated inside ```./tmp/reports.```
 
 The file with the prefix games ( games_random_urlsafe_base64.json ) contains the report of grouped information for each match.
 
@@ -54,7 +54,7 @@ Steps to proceed:
 To process your local log file in the container, add a volume in the docker-compose.yml
 * ```- <your_local_log_file_path>:/app/log/qgames.log```
 
-Two report files will be generated inside the container in the path /app/tmp/reports, but thanks to the volume in the docker-compose.yml you will get the reports in the same folder as the manual execution (./tmp/reports) 
+Two report files will be generated inside the container in the path ```/app/tmp/reports```, but thanks to the volume in the docker-compose.yml you will get the reports in the same folder as the manual execution ```./tmp/reports``` 
 
 ## How to TEST
 

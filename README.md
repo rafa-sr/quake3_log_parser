@@ -10,7 +10,7 @@
 
 <p align="center">
   <p align="center">
-    <img src="https://www.logolynx.com/images/logolynx/ac/ac9da73a0abe54ef2adb3d2b403545f5.jpeg" width="400" height="300"/>
+    <img src="https://www.logolynx.com/images/logolynx/ac/ac9da73a0abe54ef2adb3d2b403545f5.jpeg" width="350" height="200"/>
   </p>
 </p>
 

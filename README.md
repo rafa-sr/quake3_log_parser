@@ -62,7 +62,7 @@ Tests are very important and are the basis of a good software project.
 
 To execute all the tests run this command  ```bundle exec rspec```.
 
-But there's more options, you'll see a table below with the options:
+But there are more options, see the table below:
 
 | Option                                                    | Command                                                           |
 |-----------------------------------------------------------|-------------------------------------------------------------------|

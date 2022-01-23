@@ -38,9 +38,9 @@ Steps to proceed:
 
 As a result two report files will be generated inside ./tmp/reports.
 
-The file with the prefix games ( games_random_urlsafe_base64.json ) contain the report of grouped information for each match.
+The file with the prefix games ( games_random_urlsafe_base64.json ) contains the report of grouped information for each match.
 
-The file with the prefix deaths ( deaths_random_urlsafe_base64.json ) contain the report of deaths, grouped by death cause for each match.
+The file with the prefix deaths ( deaths_random_urlsafe_base64.json ) contains the report of deaths, grouped by death cause for each match.
  
 ## Install and run with Docker
 

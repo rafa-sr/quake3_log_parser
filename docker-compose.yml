@@ -4,5 +4,6 @@ services:
     build: .
     volumes:
     - ./tmp/reports:/tmp/reports
+    - ./spec/fixture/qgame.log:/log/qgames.log
     command: >
       sh -c "log_processor"

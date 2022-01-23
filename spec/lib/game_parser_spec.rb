@@ -6,7 +6,7 @@ describe GameParser do
     [{ score: 20, name: 'Isgalamido' },
      { score: 14, name: 'Oootsimo' },
      { score: 12, name: 'Zeh' },
-     { score: 8, name:  'Assasinu Credi' },
+     { score: 8,  name:  'Assasinu Credi' },
      { score: -1, name: 'Dono da Bola' },
      { score: -4, name: 'Mal' }]
   end

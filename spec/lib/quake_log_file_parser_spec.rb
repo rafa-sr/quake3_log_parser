@@ -16,15 +16,23 @@ describe QuakeLogFileParser do
     end
   end
 
-  describe '#report' do
+  context 'when reports' do
     before do
       File.foreach(File.join(ROOT, 'spec/fixture/qgames.log')) do |line|
         file_parser.parse line
       end
     end
 
-    it 'print all the matches (21)' do
-      expect(file_parser.games_report.length).to eq 21
+    describe '#games_report' do
+      it 'print all the matches (21)' do
+        expect(file_parser.games_report.length).to eq 21
+      end
+    end
+
+    describe '#deaths_report' do
+      it 'print all the matches (21)' do
+        expect(file_parser.deaths_report.length).to eq 21
+      end
     end
   end
 

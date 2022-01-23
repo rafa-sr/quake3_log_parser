@@ -54,7 +54,7 @@ Steps to proceed:
 To process your local log file in the container, add a volume in the docker-compose.yml
 * ```- <your_local_log_file_path>:/app/log/qgames.log```
 
-Two report files will be generated inside the container in the path /app/tmp/reports, but thank's to the volume in the docker-compose.yml you will get the reports on the same folder as the manual execution (./tmp/reports) 
+Two report files will be generated inside the container in the path /app/tmp/reports, but thanks to the volume in the docker-compose.yml you will get the reports on the same folder as the manual execution (./tmp/reports) 
 
 ## How to TEST
 

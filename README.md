@@ -56,7 +56,7 @@ To process your local log file in the container, add a volume in the docker-comp
 
 Two report files will be generated inside the container in the path ```/app/tmp/reports```, but thanks to the volume in the docker-compose.yml you will get the reports in the same folder as the manual execution ```./tmp/reports``` 
 
-## How to TEST
+## How to Test
 
 Tests are very important and are the basis of a good software project.
 

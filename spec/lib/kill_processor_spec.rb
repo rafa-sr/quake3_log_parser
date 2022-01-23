@@ -57,7 +57,7 @@ describe KillProcessor do
       end
 
       it 'increase the kills of the player by one' do
-        player_score = ClientHelper.client_kills(id: kill_log_line.id,
+        player_score = ClientHelper.client_kills(id:               kill_log_line.id,
                                                  client_processor: client_processor)
         expect(player_score).to eq 1
       end
@@ -76,7 +76,7 @@ describe KillProcessor do
     end
 
     it 'decrease the kills of the player 2 by one' do
-      player_score = ClientHelper.client_kills(id: kill_world_line.death_id,
+      player_score = ClientHelper.client_kills(id:               kill_world_line.death_id,
                                                client_processor: client_processor)
 
       expect(player_score).to eq(-1)
@@ -99,7 +99,7 @@ describe KillProcessor do
     end
 
     it 'player losses -1 kill' do
-      player_score = ClientHelper.client_kills(id: kill_self_line.killer_id,
+      player_score = ClientHelper.client_kills(id:               kill_self_line.killer_id,
                                                client_processor: client_processor)
       expect(player_score).to eq(-1)
     end

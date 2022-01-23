@@ -29,7 +29,7 @@ describe KillLogLine do
     it 'return the last word (MOD_ROCKET) in the log line' do
       kill_log_line = described_class.new(kill2_line)
 
-      expect(kill_log_line.death_cause).to eq MeansOfDeath::MOD_ROCKET
+      expect(kill_log_line.death_cause).to eq 'MOD_ROCKET'
     end
   end
 end

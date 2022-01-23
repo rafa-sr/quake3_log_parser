@@ -1,30 +1,29 @@
 # frozen_string_literal: true
 
 class KillProcessor
-  WORLD = 'world'
-
-  attr_reader :total_kills
+  attr_reader :total_kills, :death_causes
 
   def initialize(client_processor)
     @total_kills = 0
-    @kills_scoreboard = {}
     @client_processor = client_processor
+    @death_causes = {}
+    MeansOfDeath::DEATH_CAUSES.each { |death_cause| @death_causes.merge!({ death_cause.to_sym => 0 }) }
   end
 
   def process(log_line)
     add_kill(KillLogLine.new(log_line.line)) if log_line.kill_line?
   end
 
-  def add_kill(log_line)
-    return unless log_line.kill_line?
-
+  def add_kill(kill_log_line)
     @total_kills += 1
-    if log_line.killer_id == KillLogLine::WORLD_ID || log_line.death_id == log_line.killer_id
-      add_score(log_line.death_id, -1)
+    @death_causes[kill_log_line.death_cause.to_sym] += 1
+
+    if kill_log_line.killer_id == KillLogLine::WORLD_ID || kill_log_line.death_id == kill_log_line.killer_id
+      add_score(kill_log_line.death_id, -1)
       return
     end
 
-    add_score(log_line.killer_id, 1)
+    add_score(kill_log_line.killer_id, 1)
   end
 
   private

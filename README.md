@@ -1,11 +1,11 @@
-## Table of contents
-
 <p align="center">
   <p align="center">
     <img src="https://www.logolynx.com/images/logolynx/ac/ac9da73a0abe54ef2adb3d2b403545f5.jpeg"/>
   </p>
 </p>
 
+
+## Table of contents
 
 * [Quake 3 log parser](#Quake-3-log-parser)
     * [Introduction to Quake 3 log parser](#introduction-to-quake-3-log-parser)

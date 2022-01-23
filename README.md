@@ -36,6 +36,13 @@ Steps to proceed:
 * ```./bin/log_processor``` Will run the script [log](https://gist.github.com/cloudwalk-tests/be1b636e58abff14088c8b5309f575d8) file..
 * ```./bin/log_processor 'file_path'``` Will run the script with your log local file.
 
+As a result two reports files will be generated inside ./tmp/reports.
+
+The file with the prefix games ( games_random_urlsafe_base64.json ) contain the report of grouped information for each match.
+
+The file with the prefix deaths ( deaths_random_urlsafe_base64.json ) contain the report of deaths grouped by death cause for each match.
+ 
+
 ## Install and run with Docker
 
 Also with Docker we can get the project up and run it.
@@ -45,7 +52,10 @@ Steps to proceed:
 
 * ```docker-compose up``` Will run script with the default [log](https://gist.github.com/cloudwalk-tests/be1b636e58abff14088c8b5309f575d8) file, and write the reports on the ./tmp/reports folder
 
-* ```docker run -v <local_path_of_your_log_file>:/app/tmp/qgames.log quake3_log_parser_job``` Will run script with your local log file to work.
+To process your local log file in the container, add in the docker-compose.yml in the volumes section:
+* ```- <local_log_file_path>:/app/log/qgames.log```
+
+As the manual run, two reports files games and death will be generated in the same folder (./tmp/reports) thank's to the volumes in the docker-compose.yml
 
 ## How to TEST
 

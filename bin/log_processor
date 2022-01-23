@@ -26,7 +26,7 @@ ARGS = load_arguments
 LOG_FILE_PATH = DEFAULT_LOG_PATH if ARGS[:file_path].nil?
 LOG_FILE_PATH = ARGS[:file_path] unless ARGS[:file_path].nil?
 
-def log_reader(file)
+def process_log(file)
   puts "Processing #{file}"
   file_parser = QuakeLogFileParser.new
   File.foreach(File.join(ROOT, file)) do |line|
@@ -36,8 +36,8 @@ def log_reader(file)
   file_parser
 end
 
-def write_result(report)
-  output_file = "#{SecureRandom.urlsafe_base64}.json"
+def write_reports(report, report_type: nil)
+  output_file = "#{report_type}_#{SecureRandom.urlsafe_base64}.json"
   output_file_path = "#{OUTPUT_DIR}/#{output_file}"
   File.open(output_file_path, 'w') do |f|
     f.write(JSON.pretty_generate(report))
@@ -46,9 +46,9 @@ def write_result(report)
 end
 
 def run
-  result = log_reader(LOG_FILE_PATH)
-  write_result(result.matches_report)
-  write_result(result.death_causes_report)
+  file_parsed = process_log(LOG_FILE_PATH)
+  write_reports(file_parsed.games_report, report_type: 'games')
+  write_reports(file_parsed.death_causes_games_report, report_type: 'deaths')
 rescue StandardError => e
   LOGGER.error("#{e.class}: #{e.message}")
   LOGGER.error(e.backtrace)

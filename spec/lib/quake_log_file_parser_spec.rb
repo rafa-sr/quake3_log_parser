@@ -12,7 +12,7 @@ describe QuakeLogFileParser do
         games += 1 if LogLine.new(line).init_game?
       end
 
-      expect(file_parser.matches_report.length).to eq games
+      expect(file_parser.games_report.length).to eq games
     end
   end
 
@@ -24,7 +24,7 @@ describe QuakeLogFileParser do
     end
 
     it 'print all the matches (21)' do
-      expect(file_parser.matches_report.length).to eq 21
+      expect(file_parser.games_report.length).to eq 21
     end
   end
 
@@ -50,11 +50,13 @@ describe QuakeLogFileParser do
       match = { total_kills: 99,
                 players:     %w[Maluquinho Ronaldinho],
                 kills:       { Maluquinho: 0, Ronaldinho: 99 } }
+      death_report = { kills_by_means: { MOD_SHOTGUN: 10 } }
       game_parser = instance_double 'GameParser'
       allow(GameParser).to receive(:new).and_return game_parser
       file_parser.start_match
 
       allow(game_parser).to receive(:print).and_return(match)
+      allow(game_parser).to receive(:print_death_causes).and_return(death_report)
       file_parser.finish_match
     end
 
@@ -62,8 +64,12 @@ describe QuakeLogFileParser do
       expect(file_parser.active_match).to be false
     end
 
-    it 'append the match stats to the matches array' do
-      expect(file_parser.matches_report.last).to eq file_parser.game_parser.print
+    it 'append the match stats to the matches report array' do
+      expect(file_parser.games_report.first[:game_1]).to eq file_parser.game_parser.print
+    end
+
+    it 'append the match death causes to the death causes report array' do
+      expect(file_parser.death_causes_games_report.first[:'game-1']).to eq file_parser.game_parser.print_death_causes
     end
   end
 end

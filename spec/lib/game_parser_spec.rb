@@ -82,7 +82,7 @@ describe GameParser do
     end
 
     describe '#print_death_causes' do
-      it 'return hash that include {kill:} as a key and with player as a child keys and kills number as a value' do
+      it 'return hash that include {kills_by_means:}' do
         expect(game_parser.print_death_causes).to include :kills_by_means
       end
     end

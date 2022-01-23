@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class QuakeLogFileParser
-  attr_reader :matches_report, :active_match, :game_parser
+  attr_reader :active_match, :game_parser
 
   def initialize
     @game_parser = nil
@@ -33,31 +33,27 @@ class QuakeLogFileParser
     @active_match = false
   end
 
-  def matches_report
-    reports = []
-    @matches_report.each_with_index do |match, index|
-      reports << print_match(match, index)
+  def games_report
+    games_reports = []
+    @matches_report.each_with_index do |match_report, index|
+      games_reports << game_wrapper(match_report, index)
     end
-    reports
+    games_reports
   end
 
-  def death_causes_report
+  def death_causes_games_report
     death_reports = []
     @death_causes_report.each_with_index do |death_report, index|
-      death_reports << print_death_causes(death_report, index)
+      death_reports << game_wrapper(death_report, index)
     end
     death_reports
   end
 
   private
 
-  def print_death_causes(death_report, index)
-    means_of_death_n = "game-#{index + 1}"
-    { means_of_death_n.to_sym => death_report }
-  end
-
-  def print_match(match, index)
-    game_n = "game_#{index + 1}"
-    { game_n.to_sym => match }
+  def game_wrapper(report, index)
+    wrapper = "game_#{index + 1}" if report[:total_kills]
+    wrapper = "game-#{index + 1}" if report[:kills_by_means]
+    { wrapper.to_sym => report }
   end
 end

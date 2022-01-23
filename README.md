@@ -40,7 +40,7 @@ As a result two report files will be generated inside ./tmp/reports.
 
 The file with the prefix games ( games_random_urlsafe_base64.json ) contain the report of grouped information for each match.
 
-The file with the prefix deaths ( deaths_random_urlsafe_base64.json ) contain the report of deaths grouped by death cause for each match.
+The file with the prefix deaths ( deaths_random_urlsafe_base64.json ) contain the report of deaths, grouped by death cause for each match.
  
 ## Install and run with Docker
 
@@ -54,7 +54,7 @@ Steps to proceed:
 To process your local log file in the container, add a volume in the docker-compose.yml
 * ```- <your_local_log_file_path>:/app/log/qgames.log```
 
-As the manual run, two report files games and death will be generated in the same folder (./tmp/reports) thank's to the volumes in the docker-compose.yml
+Two report files will be generated inside the container in the path /app/tmp/reports, but thank's to the volume in the docker-compose.yml you will get the reports on the same folder as the manual execution (./tmp/reports) 
 
 ## How to TEST
 

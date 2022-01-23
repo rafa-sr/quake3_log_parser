@@ -80,5 +80,11 @@ describe GameParser do
         expect(game_parser.print[:total_kills]).to eq total_kills
       end
     end
+
+    describe '#print_death_causes' do
+      it 'return hash that include {kills_by_means:}' do
+        expect(game_parser.print_death_causes).to include :kills_by_means
+      end
+    end
   end
 end

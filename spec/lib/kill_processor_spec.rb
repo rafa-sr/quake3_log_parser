@@ -25,7 +25,7 @@ describe KillProcessor do
       kill_processor.process(LogLine.new(kill2_line))
     end
 
-    it 'do not call add_kill when log_line is different from kill_line' do
+    it 'do not call add_kill method when is not a kill log line' do
       expect(kill_processor).not_to receive(:add_kill)
 
       begun3_lines.each do |line|
@@ -36,6 +36,15 @@ describe KillProcessor do
   end
 
   describe '#add_kill' do
+    it 'register the death cause' do
+      line = KillLogLine.new(kill2_line)
+
+      kill_processor.process(line)
+
+      cause = line.death_cause.to_sym
+      expect(kill_processor.death_causes[cause]).to eq 1
+    end
+
     context 'when player Kill another player' do
       let(:kill_log_line) { KillLogLine.new(kill2_line) }
 

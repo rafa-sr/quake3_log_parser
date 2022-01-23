@@ -46,7 +46,15 @@ class GameParser
       kills:       kills }
   end
 
+  def print_death_causes
+    { kills_by_means: order_death_report }
+  end
+
   private
+
+  def order_death_report
+    @kill_processor.death_causes.sort_by { |_key, val| val }.reverse!.to_h
+  end
 
   def ranking
     players_hash.sort_by { |player| player[:score] }.reverse!

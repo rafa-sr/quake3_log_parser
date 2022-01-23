@@ -65,11 +65,11 @@ describe QuakeLogFileParser do
     end
 
     it 'append the match stats to the matches report array' do
-      expect(file_parser.games_report.first[:game_1]).to eq file_parser.game_parser.print
+      expect(file_parser.games_report.first).to include :game_1
     end
 
     it 'append the match death causes to the death causes report array' do
-      expect(file_parser.deaths_report.first[:'game-1']).to eq file_parser.game_parser.print_death_causes
+      expect(file_parser.deaths_report.first).to include :'game-1'
     end
   end
 end

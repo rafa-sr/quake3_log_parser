@@ -24,7 +24,7 @@
 
 ## Introduction to Quake 3 log parser
 
-The Quake 3 log parser is a script to process Quake 3 Arena server log file, the script will create two reports groped by match, the games report contain the name, total kill and raking of the players, the deaths report contain the death causes.
+The Quake 3 log parser is a script to process Quake 3 Arena server log file, the script will create two reports group by match, the games report contain the name, total kill and raking of the players, the deaths report contain the death causes.
 
 ## Prerequisites
 For manual installation:
@@ -35,7 +35,7 @@ For Docker installation:
 
 ## Install and run manually
 
-Having fulfilled all the prerequisites for this kind of installation you will need to follow some steps in order to setup correctly the project.
+Having fulfilled all the prerequisites for this kind of installation you will need to follow some steps in order to correctly setup the project.
 
 Steps to proceed:
 * ```bundle install``` Will install all dependencies.
@@ -70,7 +70,7 @@ The file with the prefix games ( games_random_urlsafe_base64.json ) contains the
 
 ```players:``` is the list of all the players that connected to the match_n.
 
-```kill:``` is the ranking of the players of the match_n, ordered by the score of the players in descended way.
+```kill:``` is the ranking of the players of the match_n, sorted by the score in descending order.
 
 Example of grouped information for each match:
 

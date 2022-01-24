@@ -6,7 +6,7 @@ require_relative boot_file_path
 
 LOGGER = Logger.new($stdout)
 ROOT = File.expand_path('..', __dir__)
-OUTPUT_DIR = ROOT + '/tmp/reports'
+OUTPUT_DIR = "#{ROOT}/tmp/reports".freeze
 DEFAULT_LOG_PATH = '/log/qgames.log'
 
 def load_arguments

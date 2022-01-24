@@ -138,7 +138,6 @@ But there are more options, see the table below:
 | Only one file                                             | ```bundle exec rspec spec/lib/game_parser_spec.rb```     |
 | Only one specific describe/context/it (get line number)   | ```bundle exec rspec spec/lib/game_parser_spec.rb:70``` |
 
-#------------------------------------------------------------------------------------------------------------------------
 
 > Truth can only be found in one place: the code. <br/>
 > -- Robert C. Martin

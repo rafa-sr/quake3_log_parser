@@ -6,6 +6,7 @@
     * [Install and run manually](#install-and-run-manually)
     * [Install and run with Docker](#install-and-run-with-docker)
     * [How to TEST](#how-to-test)
+  
 
 
 <p align="center">
@@ -138,6 +139,13 @@ But there are more options, see the table below:
 | Only one file                                             | ```bundle exec rspec spec/lib/game_parser_spec.rb```     |
 | Only one specific describe/context/it (get line number)   | ```bundle exec rspec spec/lib/game_parser_spec.rb:70``` |
 
+##Note
+The logic for split log files in matches is really simple, after started match (InitGame:) if any of the below log lines appear the match will end, no matter what happens after it will not be recorded.
+- ```Exit:``` 
+- ```ShutdownGame:```
+- ```InitGame:```
 
+><br/>
 > Truth can only be found in one place: the code. <br/>
 > -- Robert C. Martin
+

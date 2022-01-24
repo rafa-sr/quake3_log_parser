@@ -139,7 +139,7 @@ But there are more options, see the table below:
 | Only one file                                             | ```bundle exec rspec spec/lib/game_parser_spec.rb```     |
 | Only one specific describe/context/it (get line number)   | ```bundle exec rspec spec/lib/game_parser_spec.rb:70``` |
 
-##Note
+## Note
 The logic for split log files in matches is really simple, after started match (InitGame:) if any of the below log lines appear the match will end, no matter what happens after it will not be recorded.
 - ```Exit:``` 
 - ```ShutdownGame:```

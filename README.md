@@ -107,8 +107,8 @@ Example of grouped information for each match:
 The file with the prefix deaths ( deaths_random_urlsafe_base64.json ) contains the report of deaths, grouped by death cause for each match, Death causes (extracted from [source code](https://github.com/id-Software/Quake-III-Arena/blob/master/code/game/bg_public.h)).
 
 ```json
-  [
-    {
+[
+  {
       "game-1": {
         "kills_by_means": {
         }
@@ -122,7 +122,7 @@ The file with the prefix deaths ( deaths_random_urlsafe_base64.json ) contains t
           "MOD_FALLING": 1
         }
       }
-    }
+  }
 ]
 ```
 ## How to Test

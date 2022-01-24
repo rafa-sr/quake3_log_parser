@@ -42,12 +42,7 @@ Steps to proceed:
 * ```./bin/log_processor``` Will run the script with the default [log](https://gist.github.com/cloudwalk-tests/be1b636e58abff14088c8b5309f575d8) file.
 * ```./bin/log_processor 'file_path'``` Will run the script with your local log file.
 
-As a result two report files will be generated inside ```./tmp/reports.```
 
-The file with the prefix games ( games_random_urlsafe_base64.json ) contains the report of grouped information for each match.
-
-The file with the prefix deaths ( deaths_random_urlsafe_base64.json ) contains the report of deaths, grouped by death cause for each match.
- 
 ## Install and run with Docker
 
 Also with Docker we can get the project up and run it.
@@ -62,6 +57,54 @@ To process your local log file in the container, add a volume in the docker-comp
 
 Two report files will be generated inside the container in the path ```/app/tmp/reports```, but thanks to the volume in the docker-compose.yml you will get the reports in the same folder as the manual execution ```./tmp/reports``` 
 
+## Reports
+
+As a result two report files will be generated inside ```./tmp/reports.```
+
+The file with the prefix games ( games_random_urlsafe_base64.json ) contains the report of grouped information for each match.
+
+Example of grouped information for each match:
+
+```json
+ {
+    "game_21": {
+      "total_kills": 131,
+      "players": [
+        "Isgalamido",
+        "Oootsimo",
+        "Dono da Bola",
+        "Assasinu Credi",
+        "Zeh",
+        "Mal"
+      ],
+      "kills": {
+        "Oootsimo": 20,
+        "Zeh": 19,
+        "Isgalamido": 17,
+        "Assasinu Credi": 13,
+        "Dono da Bola": 10,
+        "Mal": 6
+      }
+    }
+ }
+```
+
+The file with the prefix deaths ( deaths_random_urlsafe_base64.json ) contains the report of deaths, grouped by death cause for each match, Death causes (extracted from [source code](https://github.com/id-Software/Quake-III-Arena/blob/master/code/game/bg_public.h))
+```json
+  {
+    "game-21": {
+      "kills_by_means": {
+        "MOD_ROCKET_SPLASH": 60,
+        "MOD_ROCKET": 37,
+        "MOD_TRIGGER_HURT": 14,
+        "MOD_RAILGUN": 9,
+        "MOD_MACHINEGUN": 4,
+        "MOD_SHOTGUN": 4,
+        "MOD_FALLING": 3
+      }
+    }
+  }
+```
 ## How to Test
 
 Tests are very important and are the basis of a good software project.

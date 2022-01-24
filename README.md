@@ -1,4 +1,4 @@
-## Table of contents
+# Table of contents
 
 * [Quake 3 log parser](#Quake-3-log-parser)
     * [Introduction to Quake 3 log parser](#introduction-to-quake-3-log-parser)
@@ -61,6 +61,8 @@ Two report files will be generated inside the container in the path ```/app/tmp/
 
 As a result two report files will be generated inside ```./tmp/reports.```
 
+### Match reports:
+
 The file with the prefix games ( games_random_urlsafe_base64.json ) contains the report of grouped information for each match.
 
 Example of grouped information for each match:
@@ -88,6 +90,8 @@ Example of grouped information for each match:
     }
  }
 ```
+
+### Death reports:
 
 The file with the prefix deaths ( deaths_random_urlsafe_base64.json ) contains the report of deaths, grouped by death cause for each match, Death causes (extracted from [source code](https://github.com/id-Software/Quake-III-Arena/blob/master/code/game/bg_public.h))
 ```json

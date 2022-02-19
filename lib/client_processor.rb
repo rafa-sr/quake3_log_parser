@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ClientProcessor
+class ClientProcessor < Processor
   attr_reader :disconnected_clients, :connected_clients
 
   def initialize

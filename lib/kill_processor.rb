@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class KillProcessor
+class KillProcessor < Processor
   attr_reader :total_kills, :death_causes
 
   def initialize(client_processor)

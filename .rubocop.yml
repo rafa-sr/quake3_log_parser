@@ -27,6 +27,9 @@ Layout/HashAlignment:
 Layout/LineLength:
   Exclude:
     - "**/shared/**.rb"
+Lint/MissingSuper:
+  Exclude:
+    - "lib/*_processor.rb"
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
 Layout/SpaceAroundMethodCallOperator:
@@ -40,8 +43,6 @@ Lint/DeprecatedOpenSSLConstant:
 Metrics/ModuleLength:
   Exclude:
     - "**/*_spec.rb"
-    -
-
 Metrics/BlockLength:
   Exclude:
     - "**/*_spec.rb"
